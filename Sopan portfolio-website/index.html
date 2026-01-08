@@ -24,6 +24,7 @@
 
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="assets/css/styles.css">
+     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
     <title> Sopan Fuke | Full Stack MERN Developer< </title>
 </head>
@@ -42,11 +43,12 @@
 
             <div class="nav__menu">
                 <ul class="nav__list">
-                    <li class="nav__item ">
-                        <a href="#home" class="nav__link">
-                            <i class='bx bx-home'></i>
-                        </a>
-                    </li>
+                    <li class="nav__item">
+  <a href="#home" class="nav__link">
+    <i class='bx bx-home'></i> Home
+  </a>
+</li>
+
 
                     <li class="nav__item ">
                         <a href="#about" class="nav__link">
@@ -105,17 +107,43 @@
       </div>
 
       <div class="home__button">
-        <a href="#" class="button button--ghost">Download CV</a>
+    
+        <a 
+  href="./assets/pdf/Sopan_Fuke_Rusume.pdf"
+  class="button button--ghost"
+  download
+>
+  Download Resume
+</a>
+
+
+
+
         <a href="#about" class="button">About Me</a>
       </div>
     </div>
 
     <!-- IMAGE -->
-    <div class="home__image">
+    <!-- <div class="home__image">
       <div class="home__handle">
-        <img src="assets/img/profile.png.jpeg" alt="Sopan" class="home__img">
+        <img src="assets/img/profile.png.jpg" alt="Sopan" class="home__img">
       </div>
-    </div>
+    </div> -->
+   <!-- Hero Profile Card -->
+
+<div class="home__image profile-box">
+  <div class="profile-box-border">
+    <img src="assets/img/profile.png.jpg" alt="Sopan Fuke" class="profile-box-img">
+  </div>
+  <div class="home__image profile-box" data-aos="fade-up" data-aos-duration="1000">
+
+</div>
+
+
+
+
+
+
 
   </div>
 </section>
@@ -139,8 +167,7 @@
 </section>
 
 
-        <!--=============== ABOUT ===============-->
-        <!--=============== ABOUT ===============-->
+   
 <section class="about section" id="about">
   <span class="section__subtitle">My Intro</span>
   <h2 class="section__title">About Me</h2>
@@ -566,61 +593,38 @@
 
     <!--=============== FOOTER ===============-->
     <footer class="footer">
-        <div class="footer__container container">
-            <h1 class="footer__title">Sopan Fuke</h1>
-            <p class="footer__tagline">
-  Building modern web experiences with MERN Stack.
-</p>
+  <div class="footer__container container">
+  
+    <h2 class="footer__title">Sopan Fuke</h2>
+    <p class="footer__tagline">Building modern web experiences with MERN Stack.</p>
+
+    <ul class="footer__menu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="footer__social">
+  <a href="https://linkedin.com/in/sopan-fuke-47265033a" target="_blank">
+    <i class='bx bxl-linkedin'></i>
+  </a>
+  <a href="https://twitter.com/usertw" target="_blank">
+    <i class='bx bxl-twitter'></i>
+  </a>
+  <a href="https://github.com/so301" target="_blank">
+    <i class='bx bxl-github'></i>
+  </a>
+  <a href="https://instagram.com/yourinsta" target="_blank">
+    <i class='bx bxl-instagram'></i>
+  </a>
+</div>
 
 
-            <ul class="footer__list">
-
-                <li class="footer__item">
-                    <a href="#" class="footer__link">Home</a>
-                </li>
-                <li class="footer__item">
-                    <a href="#about" class="footer__link">About</a>
-                </li>
-                <li class="footer__item">
-                    <a href="#skills" class="footer__link">Skills</a>
-                </li>
-                <li class="footer__item">
-                    <a href="#work" class="footer__link">Work</a>
-                </li>
-                <li class="footer__item">
-                    <a href="#contact" class="footer__link">Contact</a>
-                </li>
-            </ul>
-
-            <ul class="footer__social">
-                <li class="footer__social-item">
-                    <a href="#" target="_blank" class="footer__social-link">
-                        <i class='bx bxl-facebook footer__social-icon'></i>
-                    </a>
-                </li>
-                <li class="footer__social-item">
-                    <a href="#" target="_blank" class="footer__social-link">
-                        <i class='bx bxl-twitter footer__social-icon'></i>
-                    </a>
-                </li>
-                <li class="footer__social-item">
-                    <a href="#" target="_blank" class="footer__social-link">
-                        <i class='bx bxl-linkedin footer__social-icon'></i>
-                    </a>
-                </li>
-                <li class="footer__social-item">
-                    <a href="#" target="_blank" class="footer__social-link">
-                        <i class='bx bxl-instagram footer__social-icon'></i>
-                    </a>
-                </li>
-            </ul>
-
-            <span class="footer__copy">
-                &#169; 2026 Sopan Fuke. • Open to Full-Time & Internship Roles.
-
-            </span>
-        </div>
-    </footer>
+    <p class="footer__copy">© 2026 Sopan Fuke • Open to Full-Time & Internship Roles.</p>
+  </div>
+</footer>
 
     <!--=============== SCROLLREVEAL ===============-->
 
@@ -635,6 +639,19 @@
 
     <!--=============== MAIN JS ===============-->
     <script src="assets/js/main.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>AOS.init({ once: true });</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.3/vanilla-tilt.min.js"></script>
+<script>
+  VanillaTilt.init(document.querySelector(".pro-border"), {
+    max: 12,
+    speed: 400,
+    glare: true,
+    "max-glare": 0.25,
+  });
+</script>
+
+
 </body>
 
 </html>

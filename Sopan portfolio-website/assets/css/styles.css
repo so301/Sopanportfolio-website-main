@@ -248,6 +248,12 @@ img {
   z-index: var(--z-fixed);
   transition: 0.4s;
 }
+header.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
 .home {
   padding-bottom: 6rem;
 }
@@ -307,8 +313,15 @@ img {
   );
   box-shadow: 0 0 16px hsla(var(--first-hue), var(--sat), var(--lig), 0.4);
   border-radius: 5rem;
+   color: #ff6b6b;
+  font-weight: bold;
 
-  color: var(--title-color);
+  /* color: var(--title-color); */
+}
+header.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 /* Change background header */
@@ -317,6 +330,26 @@ img {
 }
 
 /*=============== HOME ===============*/
+
+.gradient-card {
+  width: 280px;
+  margin: auto;
+  padding: 12px;
+  background: linear-gradient(135deg, #8b5cf6, #e0c3fc);
+  border-radius: 40px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-img {
+  width: 100%;
+  border-radius: 30px;
+  border: 4px solid #fff;
+}
+
+
 /*=============== HOME ===============*/
 
 /*=============== HOME (CLASSY FIX) ===============*/
@@ -479,28 +512,41 @@ img {
 }
 
 /* ===== HERO IMAGE ===== */
+
 .home__handle {
   width: 300px;
   height: 420px;
+
   background: linear-gradient(
     180deg,
     hsla(var(--first-hue), var(--sat), var(--lig), 0.45),
-    hsla(var(--first-hue), var(--sat), var(--lig), 0.1)
+    hsla(var(--first-hue), var(--sat), var(--lig), 0.08)
   );
-  border-radius: 10rem 10rem 1rem 1rem;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+
+  border-radius: 10rem 10rem 1.5rem 1.5rem;
   overflow: hidden;
   margin: 0 auto;
+
+  box-shadow: 0 30px 60px rgba(0,0,0,0.12);
 }
 
-.home__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10rem 10rem 1rem 1rem;
+/* 👇 IMAGE CONTROL HERE */
+.home__photo {
+  background-image: url("../img/profile.png.jpg");
+  background-repeat: no-repeat;
+
+  background-size: 100%;        /* 👈 make image fill naturally */
+  background-position: center 6%; /* 👈 push image UP (face centered) */
 }
+
+
+
+
+/* IMAGE PERFECT FIT */
+
+
+
+
 
 /* ===== SOCIAL LINKS ===== */
 .home__social {
@@ -1735,4 +1781,226 @@ img {
 .education__date {
   font-size: 0.85rem;
   color: var(--first-color);
+}
+@media (max-width: 768px) {
+  .nav__list {
+    flex-direction: column;
+  }
+}
+/* ==================================================
+   PRO Animated Floating Profile Card
+   ================================================== */
+
+
+/* =========== PRO PROFILE CARD (Perfect Fit + Theme Colors) ========== */
+
+.pro-profile-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  perspective: 1200px;
+}
+
+.pro-border {
+  width: 300px;
+  height: 360px;
+  padding: 8px;
+  background: linear-gradient(135deg, #8B5CF6, #A78BFA);
+  border-radius: 40px;
+  position: relative;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.16);
+}
+
+.pro-img-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 32px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pro-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* ensures it fills the card */
+  border-radius: 32px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Hover Micro Interaction */
+.pro-border:hover .pro-img {
+  transform: scale(1.04);
+  box-shadow: 0 20px 52px rgba(0, 0, 0, 0.28);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .pro-border {
+    width: 240px;
+    height: 300px;
+  }
+}
+ /* ===== Profile Box Style - Professional Rounded Look ===== */
+.profile-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 20px 0;
+}
+
+.profile-box-border {
+  width: 280px;
+  height: 340px;
+  padding: 8px;
+  background: #fff;
+  border-radius: 32px;
+  border: 8px solid #8B5CF6; /* same purple border color theme */
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.15); /* nice depth shadow */
+  overflow: hidden;
+  position: relative;
+}
+
+.profile-box-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* makes image fill the box fully */
+  border-radius: 24px; /* inner rounding to match card */
+  transition: transform 0.35s ease;
+}
+
+/* Hover subtle zoom effect */
+.profile-box-border:hover .profile-box-img {
+  transform: scale(1.03);
+}
+
+/* Responsive smaller screens */
+@media (max-width: 768px) {
+  .profile-box-border {
+    width: 240px;
+    height: 300px;
+    border-width: 6px;
+  }
+}
+
+/* ================== Professional Footer Style ================== */
+
+.footer {
+  background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+  color: #fff;
+  padding: 60px 0 30px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer__container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* Title */
+.footer__title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+/* Tagline */
+.footer__tagline {
+  font-size: 1rem;
+  margin-bottom: 18px;
+  opacity: 0.9;
+}
+
+/* Navigation Menu */
+.footer__menu {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.footer__menu a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.footer__menu a:hover {
+  color: #000;
+  transform: scale(1.08);
+}
+
+/* Social icons */
+.footer__social {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.footer__social a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  background: #fff;
+  color: #8b5cf6;
+  font-size: 1.3rem;
+  border-radius: 12px;
+  transition: 0.3s ease;
+}
+
+.footer__social a:hover {
+  background: #8b5cf6;
+  color: #fff;
+  transform: translateY(-4px);
+}
+
+/* Copyright & tagline */
+.footer__copy {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin-top: 12px;
+  padding-bottom: 12px;
+  border-top: 1px solid rgba(255,255,255,0.25);
+}
+
+/* Optional little top line */
+.footer::before {
+  content: "";
+  width: 60px;
+  height: 4px;
+  background: #fff;
+  border-radius: 3px;
+  display: block;
+  margin: -45px auto 20px;
+}
+.footer__social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: #fff;
+  color: #8b5cf6;
+  margin: 0 10px;
+  font-size: 1.4rem;
+  border-radius: 12px;
+  transition: 0.3s ease;
+}
+
+.footer__social a:hover {
+  background: #8b5cf6;
+  color: #fff;
+  transform: translateY(-4px);
 }
