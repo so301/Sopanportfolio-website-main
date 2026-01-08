@@ -236,6 +236,9 @@ img {
   font-size: var(--smaller-font-size);
   color: var(--text-color-light);
 }
+nav {
+  display: none; /* Hides the entire navigation bar */
+}
 
 /*=============== HEADER & NAV===============*/
 /* 
@@ -346,12 +349,17 @@ header.header {
 }
 
 /* --- Hamburger Icon --- */
-.nav__toggle {
+/* .nav__toggle {
   display: none;
   font-size: 2rem;
   cursor: pointer;
-  color: #333;
+  color: #333; */
+nav .toggle, nav .close-btn {
+  margin-left: 1rem;
+  cursor: pointer;
+  font-size: 1.2rem;
 }
+
 
 /* --- Mobile Menu --- */
 .nav__menu {
@@ -2096,24 +2104,147 @@ header.header {
 /* Mobile-first default (your current style) */
 
 /* Desktop view */
-@media (min-width: 1024px) {
-  .nav-menu {
-    width: 100%;
-    height: 60px; /* normal navbar height */
-    flex-direction: row; /* horizontal layout */
-    align-items: center; /* vertically center items */
-    justify-content: space-between; /* spread items horizontally */
-    padding: 0 32px;
-    border-radius: 0; /* remove huge round corners */
-    position: relative; /* not fixed */
-    bottom: auto;
-    top: auto;
-    left: auto;
-    right: auto;
-    box-shadow: none; /* optional, cleaner desktop look */
+
+
+@media (min-width: 768px) {
+  /* Make nav horizontal and clean */
+  .nav__menu {
+    display: flex !important;       /* horizontal menu */
+    position: static !important;    /* remove fixed/mobile overlay */
+    width: auto !important;
+    height: auto !important;
+    padding: 0 !important;
+    gap: 2rem;                      /* space between menu items */
+    background: transparent !important; /* no gray overlay */
+    box-shadow: none !important;    /* remove shadow */
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
   }
 
-  .nav-menu a {
-    margin: 0 16px; /* spacing between nav items */
+  /* Hide the mobile toggle button */
+  .nav__toggle {
+    display: none !important;
   }
+
+  /* Remove mobile active class effect on desktop */
+  .nav__menu.active {
+    right: auto !important;
+    top: auto !important;
+  }
+
+  /* Menu links styling */
+  .nav__link {
+    color: #111;           /* black/nav color */
+    font-weight: 600;
+    padding: 0;
+  }
+}
+/* ---------- Desktop Header Hidden on Mobile ---------- */
+.desktop-header {
+  display: none;
+}
+
+/* ---------- Desktop View (>=992px) ---------- */
+@media screen and (min-width: 992px) {
+  .desktop-header {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+
+  .desktop-header.scrolled {
+    background-color: #f9f9f9;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  }
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+
+  .nav__logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #333;
+    text-decoration: none;
+  }
+
+  .nav__list {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav__link {
+    color: #333;
+    font-weight: 500;
+    position: relative;
+    padding: 0.25rem 0;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  /* Hover underline effect */
+  .nav__link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background-color: #007bff;
+    transition: 0.3s;
+  }
+
+  .nav__link:hover::after,
+  .nav__link.active::after {
+    width: 100%;
+  }
+}
+
+/* ---------- Theme Button (Desktop & Mobile) ---------- */
+#theme-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 1.3rem;
+  color: #333;
+  cursor: pointer;
+  z-index: 1000;
+  transition: 0.3s;
+}
+
+/* Mobile view (<992px) */
+@media screen and (max-width: 991px) {
+  #theme-button {
+    bottom: 20px;
+    top: auto;
+    right: 20px;
+    font-size: 1.5rem;
+    background-color: #fff;
+    padding: 0.5rem;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+
+  #theme-button:hover {
+    transform: scale(1.1);
+    color: #007bff;
+  }
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
 }

@@ -1,104 +1,86 @@
 /*=============== CHANGE BACKGROUND HEADER ===============*/
 function scrollHeader() {
   const header = document.getElementById("header");
-  // When the scroll is greater than 50 viewport height, add the scroll-header class to the header tag
-  if (this.scrollY >= 50) header.classList.add("scroll-header");
+  if (!header) return;
+
+  if (window.scrollY >= 50) header.classList.add("scroll-header");
   else header.classList.remove("scroll-header");
 }
 window.addEventListener("scroll", scrollHeader);
 
-/*=============== SERVICES MODAL ===============*/
-// Get the modal
-const modalViews = document.querySelectorAll(".services__modal"),
-  modalBtns = document.querySelectorAll(".services__button"),
-  modalClose = document.querySelectorAll(".services__modal-close");
 
-// When the user clicks on the button, open the modal
-let modal = function (modalClick) {
-  modalViews[modalClick].classList.add("active-modal");
+/*=============== SERVICES MODAL ===============*/
+const modalViews = document.querySelectorAll(".services__modal");
+const modalBtns = document.querySelectorAll(".services__button");
+const modalClose = document.querySelectorAll(".services__modal-close");
+
+const openModal = (index) => {
+  modalViews[index].classList.add("active-modal");
 };
 
-modalBtns.forEach((mb, i) => {
-  mb.addEventListener("click", () => {
-    modal(i);
+modalBtns.forEach((btn, i) => {
+  btn.addEventListener("click", () => openModal(i));
+});
+
+modalClose.forEach((closeBtn) => {
+  closeBtn.addEventListener("click", () => {
+    modalViews.forEach((modal) => modal.classList.remove("active-modal"));
   });
 });
 
-modalClose.forEach((mc) => {
-  mc.addEventListener("click", () => {
-    modalViews.forEach((mv) => {
-      mv.classList.remove("active-modal");
-    });
-  });
-});
 
 /*=============== MIXITUP FILTER PORTFOLIO ===============*/
-
-let mixer = mixitup(".work__container", {
-  selectors: {
-    target: ".work__card",
-  },
-  animation: {
-    duration: 300,
-  },
-});
-
-/* Link active work */
-const workLinks = document.querySelectorAll(".work__item");
-
-function activeWork(workLink) {
-  workLinks.forEach((wl) => {
-    wl.classList.remove("active-work");
+if (document.querySelector(".work__container")) {
+  mixitup(".work__container", {
+    selectors: { target: ".work__card" },
+    animation: { duration: 300 },
   });
-  workLink.classList.add("active-work");
 }
 
-workLinks.forEach((wl) => {
-  wl.addEventListener("click", () => {
-    activeWork(wl);
+
+/*=============== ACTIVE WORK FILTER ===============*/
+const workLinks = document.querySelectorAll(".work__item");
+
+workLinks.forEach((item) => {
+  item.addEventListener("click", () => {
+    workLinks.forEach((el) => el.classList.remove("active-work"));
+    item.classList.add("active-work");
   });
 });
 
+
 /*=============== SWIPER TESTIMONIAL ===============*/
-
-let swiperTestimonial = new Swiper(".testimonial__container", {
-  spaceBetween: 24,
-  loop: true,
-  grabCursor: true,
-
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-  },
-
-  breakpoints: {
-    576: {
-      slidesPerView: 2,
+if (document.querySelector(".testimonial__container")) {
+  new Swiper(".testimonial__container", {
+    spaceBetween: 24,
+    loop: true,
+    grabCursor: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
     },
-    768: {
-      slidesPerView: 2,
-      spaceBetween: 48,
+    breakpoints: {
+      576: { slidesPerView: 2 },
+      768: { slidesPerView: 2, spaceBetween: 48 },
     },
-  },
-});
+  });
+}
 
-/*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
 
+/*=============== SCROLL ACTIVE LINK + DESKTOP HEADER SHADOW ===============*/
 const sections = document.querySelectorAll("section[id]");
+const desktopHeader = document.getElementById("desktop-header");
 
 function scrollActive() {
   const scrollY = window.pageYOffset;
 
-  sections.forEach((current) => {
-    const sectionHeight = current.offsetHeight;
-    const sectionTop = current.offsetTop - 58;
-    const sectionId = current.getAttribute("id");
+  sections.forEach((section) => {
+    const sectionHeight = section.offsetHeight;
+    const sectionTop = section.offsetTop - 60;
+    const sectionId = section.getAttribute("id");
 
-    const navLink = document.querySelector(
-      `.nav__menu a[href="#${sectionId}"]`
-    );
-
-    if (!navLink) return; // **important — skip if not found**
+    const navLink = document.querySelector(`.nav__menu a[href="#${sectionId}"]`);
+    if (!navLink) return;
 
     if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
       navLink.classList.add("active-link");
@@ -106,47 +88,43 @@ function scrollActive() {
       navLink.classList.remove("active-link");
     }
   });
-}
 
+  if (desktopHeader) {
+    desktopHeader.classList.toggle("scrolled", scrollY > 50);
+  }
+}
 window.addEventListener("scroll", scrollActive);
 
 
-
-/*=============== LIGHT DARK THEME ===============*/
+/*=============== LIGHT / DARK THEME (MOBILE + DESKTOP) ===============*/
 const themeButton = document.getElementById("theme-button");
 const lightTheme = "light-theme";
 const iconTheme = "bx-sun";
 
-// Previously selected topic (if user selected)
-const selectedTheme = localStorage.getItem("selected-theme");
-const selectedIcon = localStorage.getItem("selected-icon");
+if (themeButton) {
+  const selectedTheme = localStorage.getItem("selected-theme");
+  const selectedIcon = localStorage.getItem("selected-icon");
 
-// We obtain the current theme that the interface has by validating the light-theme class
-const getCurrentTheme = () =>
-  document.body.classList.contains(lightTheme) ? "dark" : "light";
-const getCurrentIcon = () =>
-  themeButton.classList.contains(iconTheme) ? "bx bx-moon" : "bx bx-sun";
+  if (selectedTheme) {
+    document.body.classList[selectedTheme === "dark" ? "add" : "remove"](lightTheme);
+    themeButton.classList[selectedIcon === "bx bx-moon" ? "add" : "remove"](iconTheme);
+  }
 
-// We validate if the user previously chose a topic
-if (selectedTheme) {
-  // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the light
-  document.body.classList[selectedTheme === "dark" ? "add" : "remove"](
-    lightTheme
-  );
-  themeButton.classList[selectedIcon === "bx bx-moon" ? "add" : "remove"](
-    iconTheme
-  );
+  themeButton.addEventListener("click", () => {
+    document.body.classList.toggle(lightTheme);
+    themeButton.classList.toggle(iconTheme);
+
+    localStorage.setItem(
+      "selected-theme",
+      document.body.classList.contains(lightTheme) ? "dark" : "light"
+    );
+    localStorage.setItem(
+      "selected-icon",
+      themeButton.classList.contains(iconTheme) ? "bx bx-moon" : "bx bx-sun"
+    );
+  });
 }
 
-// Activate / deactivate the theme manually with the button
-themeButton.addEventListener("click", () => {
-  // Add or remove the light / icon theme
-  document.body.classList.toggle(lightTheme);
-  themeButton.classList.toggle(iconTheme);
-  // We save the theme and the current icon that the user chose
-  localStorage.setItem("selected-theme", getCurrentTheme());
-  localStorage.setItem("selected-icon", getCurrentIcon());
-});
 
 /*=============== SCROLL REVEAL ANIMATION ===============*/
 const sr = ScrollReveal({
@@ -157,123 +135,45 @@ const sr = ScrollReveal({
   reset: true,
 });
 
-sr.reveal(`.nav__menu`, {
-  delay: 100,
-  scale: 0.1,
-  origin: "bottom",
-  distance: "300px",
-});
+sr.reveal(".nav__menu", { origin: "bottom", distance: "300px", scale: 0.1 });
+sr.reveal(".home__data, .home__handle, .home__social, .home__scroll");
+sr.reveal(".about__img", { origin: "left" });
+sr.reveal(".about__data, .about__description", { origin: "right" });
+sr.reveal(".skills__content, .work__card, .testimonial__container");
+sr.reveal(".contact__info, .contact__title-info", { origin: "left" });
+sr.reveal(".contact__form, .contact__title-form", { origin: "right" });
+sr.reveal(".footer");
 
-sr.reveal(`.home__data`);
-sr.reveal(`.home__handle`, {
-  delay: 100,
-});
 
-sr.reveal(`.home__social, .home__scroll`, {
-  delay: 100,
-  origin: "bottom",
-});
-
-sr.reveal(`.about__img`, {
-  delay: 100,
+/*=============== EXPERIENCE ANIMATION ===============*/
+ScrollReveal().reveal(".experience__card", {
   origin: "left",
-  scale: 0.9,
-  distance: "30px",
-});
-
-sr.reveal(`.about__data, .about__description, .about__button-contact`, {
-  delay: 100,
-  scale: 0.9,
-  origin: "right",
-  distance: "30px",
-});
-
-sr.reveal(`.skills__content`, {
-  delay: 100,
-  scale: 0.9,
-  origin: "bottom",
-  distance: "30px",
-});
-
-sr.reveal(`.services__title, services__button`, {
-  delay: 100,
-  scale: 0.9,
-  origin: "top",
-  distance: "30px",
-});
-
-sr.reveal(`.work__card`, {
-  delay: 100,
-  scale: 0.9,
-  origin: "bottom",
-  distance: "30px",
-});
-
-sr.reveal(`.testimonial__container`, {
-  delay: 100,
-  scale: 0.9,
-  origin: "bottom",
-  distance: "30px",
-});
-
-sr.reveal(`.contact__info, .contact__title-info`, {
-  delay: 100,
-  scale: 0.9,
-  origin: "left",
-  distance: "30px",
-});
-
-sr.reveal(`.contact__form, .contact__title-form`, {
-  delay: 100,
-  scale: 0.9,
-  origin: "right",
-  distance: "30px",
-});
-
-sr.reveal(`.footer, footer__container`, {
-  delay: 100,
-  scale: 0.9,
-  origin: "bottom",
-  distance: "30px",
-});
-/*=============== EXPERIENCE SCROLL ANIMATION ===============*/
-ScrollReveal().reveal('.experience__card', {
-  origin: 'left',
-  distance: '40px',
+  distance: "40px",
   duration: 1000,
   interval: 200,
-  reset: false
 });
-/* ===== PAGE LOADER ===== */
+
+
+/*=============== PAGE LOADER ===============*/
 window.addEventListener("load", () => {
   const loader = document.getElementById("page-loader");
-  loader.classList.add("hide");
+  if (loader) loader.classList.add("hide");
 });
 
-/* ===== Mobile Nav Toggle ===== */
-(function() {
-  const navMenu = document.getElementById('nav-menu'),
-        navToggle = document.getElementById('nav-toggle'),
-        navClose = document.getElementById('nav-close');
 
-  // Show Menu
-  if(navToggle){
-    navToggle.addEventListener('click', () => {
-      navMenu.classList.add('active');
-    });
-  }
+/*=============== MOBILE NAV TOGGLE ===============*/
+const navToggle = document.querySelector(".nav__toggle");
+const navMenu = document.querySelector(".nav__menu");
 
-  // Close Menu
-  if(navClose){
-    navClose.addEventListener('click', () => {
-      navMenu.classList.remove('active');
-    });
-  }
-
-  // Close menu when clicking nav links
-  document.querySelectorAll('.nav__link').forEach(link => {
-    link.addEventListener('click', () => {
-      navMenu.classList.remove('active');
-    });
+if (navToggle && navMenu) {
+  navToggle.addEventListener("click", () => {
+    if (window.innerWidth < 768) {
+      navMenu.classList.toggle("active");
+    }
   });
-})();
+}
+
+
+
+
+
