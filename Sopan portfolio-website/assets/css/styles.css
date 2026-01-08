@@ -476,7 +476,7 @@ header.header {
   .home__button {
     justify-content: flex-start;
   }
-}
+
 
 
 /* ===== AVAILABLE FOR WORK ===== */
@@ -2003,4 +2003,24 @@ header.header {
   background: #8b5cf6;
   color: #fff;
   transform: translateY(-4px);
+}
+/* Example for mobile screens */
+@media (max-width: 768px) {
+  .nav {
+    position: fixed;  /* Keep it at bottom or top */
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .nav a {
+    font-size: 1.2rem;
+    padding: 10px;
+  }
 }
