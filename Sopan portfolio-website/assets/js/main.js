@@ -249,3 +249,31 @@ window.addEventListener("load", () => {
   const loader = document.getElementById("page-loader");
   loader.classList.add("hide");
 });
+
+/* ===== Mobile Nav Toggle ===== */
+(function() {
+  const navMenu = document.getElementById('nav-menu'),
+        navToggle = document.getElementById('nav-toggle'),
+        navClose = document.getElementById('nav-close');
+
+  // Show Menu
+  if(navToggle){
+    navToggle.addEventListener('click', () => {
+      navMenu.classList.add('active');
+    });
+  }
+
+  // Close Menu
+  if(navClose){
+    navClose.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+    });
+  }
+
+  // Close menu when clicking nav links
+  document.querySelectorAll('.nav__link').forEach(link => {
+    link.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+    });
+  });
+})();

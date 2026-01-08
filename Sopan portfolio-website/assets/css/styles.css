@@ -237,7 +237,8 @@ img {
   color: var(--text-color-light);
 }
 
-/*=============== HEADER & NAV===============*/
+/*=============== HEADER & NAV===============*//
+/* 
 .header {
   position: fixed;
   top: 0;
@@ -302,6 +303,92 @@ header.header {
   transition: 0.4s;
   display: flex;
   border-radius: 5rem;
+} */
+/* --- Basic Nav Styling --- */
+.header {
+  width: 100%;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.nav__logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.nav__list {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav__link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav__link:hover {
+  color: #007bff;
+}
+
+/* --- Hamburger Icon --- */
+.nav__toggle {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #333;
+}
+
+/* --- Mobile Menu --- */
+.nav__menu {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 250px;
+  height: 100vh;
+  background-color: #fff;
+  padding: 2rem;
+  gap: 2rem;
+  transition: 0.3s;
+  box-shadow: -2px 0 15px rgba(0,0,0,0.1);
+}
+
+.nav__menu.active {
+  right: 0;
+}
+
+.nav__close {
+  font-size: 2rem;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+/* --- Mobile Styling --- */
+@media (max-width: 768px) {
+  .nav__list {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .nav__toggle {
+    display: block;
+  }
 }
 
 /* Active link */
@@ -2005,22 +2092,4 @@ header.header {
   transform: translateY(-4px);
 }
 /* Example for mobile screens */
-@media (max-width: 768px) {
-  .nav {
-    position: fixed;  /* Keep it at bottom or top */
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 15px;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 10px 20px;
-    border-radius: 50px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  }
 
-  .nav a {
-    font-size: 1.2rem;
-    padding: 10px;
-  }
-}
