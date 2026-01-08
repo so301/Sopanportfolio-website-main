@@ -237,14 +237,14 @@ img {
   color: var(--text-color-light);
 }
 
-/*=============== HEADER & NAV===============*//
+/*=============== HEADER & NAV===============*/
 /* 
 .header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  /* height: var(--header-height); */
+  height: var(--header-height);
   background-color: var(--body-color);
   z-index: var(--z-fixed);
   transition: 0.4s;
@@ -2093,3 +2093,27 @@ header.header {
 }
 /* Example for mobile screens */
 
+/* Mobile-first default (your current style) */
+
+/* Desktop view */
+@media (min-width: 1024px) {
+  .nav-menu {
+    width: 100%;
+    height: 60px; /* normal navbar height */
+    flex-direction: row; /* horizontal layout */
+    align-items: center; /* vertically center items */
+    justify-content: space-between; /* spread items horizontally */
+    padding: 0 32px;
+    border-radius: 0; /* remove huge round corners */
+    position: relative; /* not fixed */
+    bottom: auto;
+    top: auto;
+    left: auto;
+    right: auto;
+    box-shadow: none; /* optional, cleaner desktop look */
+  }
+
+  .nav-menu a {
+    margin: 0 16px; /* spacing between nav items */
+  }
+}
